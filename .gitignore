@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 *.class
 
 # Package Files #
 *.war
 *.ear
+=======
+*.class
+
+# Package Files #
+*.war
+*.ear
+>>>>>>> 9e9528bd0bbe826a51c39c7cc0f7109f428becec
