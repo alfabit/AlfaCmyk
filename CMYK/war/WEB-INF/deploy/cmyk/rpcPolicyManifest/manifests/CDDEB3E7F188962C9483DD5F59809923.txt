@@ -1,0 +1,2 @@
+serviceClass: com.digitwolf.cmyk.client.GreetingService
+path: 3EAC8A6E1F73FCD4D2533055D607B873.gwt.rpc
