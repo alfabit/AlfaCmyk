@@ -39,7 +39,7 @@ public class MachinesList extends Composite {
         Machine machine = new Machine();
         machine.setName("Test1");
         
-		DataService.Util.getInstance().addMachine(machine, new AsyncCallback<Void>() {
+		DataService.Util.getInstance().addMachine(machine, new AsyncCallback<Machine>() {
             @Override
             public void onFailure(Throwable caught) {
                 //To change body of implemented methods use File | Settings | File Templates.
@@ -47,7 +47,7 @@ public class MachinesList extends Composite {
             }
 
             @Override
-            public void onSuccess(Void result) {
+            public void onSuccess(Machine result) {
                 loadMachines();
             }
         });

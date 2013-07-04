@@ -27,6 +27,11 @@ import com.digitwolf.cmyk.server.dal.PMF;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class DataServiceImpl extends RemoteServiceServlet implements DataService {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
     public ArrayList<Machine> getMachines() {
 		final String DEFAULT_QUERY = "select e from " + Machine.class.getName() + " as e";
@@ -42,16 +47,18 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
     }
 
     @Override
-    public void addMachine(Machine machine) {        
+    public Machine addMachine(Machine machine) {        
     	PersistenceManager pm = PMF.get().getPersistenceManager();
         try {
             pm.makePersistent(machine);
         } finally {
             pm.close();
         }
+        return machine;
     }
     
-    private static <T> Collection<T> query(String query) {
+    @SuppressWarnings("unchecked")
+	private static <T> Collection<T> query(String query) {
         PersistenceManager pm = PMF.get().getPersistenceManager();
         try {
             List<T> flights = (List<T>) pm.newQuery(query).execute();
@@ -60,4 +67,24 @@ public class DataServiceImpl extends RemoteServiceServlet implements DataService
             pm.close();
         }
     }
+
+	@Override
+	public void deleteMachine(Machine machine) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            pm.deletePersistent(machine);
+        } finally {
+            pm.close();
+        }
+	}
+
+	@Override
+	public void updateMachine(Machine machine) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            pm.makePersistent(machine);
+        } finally {
+            pm.close();
+        }
+	}
 }

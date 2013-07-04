@@ -30,5 +30,13 @@
   	<servlet-name>DataService</servlet-name>
   	<url-pattern>/cmyk/DataService</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>UserService</servlet-name>
+  	<servlet-class>com.digitwolf.cmyk.server.UserServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UserService</servlet-name>
+  	<url-pattern>/cmyk/UserService</url-pattern>
+  </servlet-mapping>
 
 </web-app>

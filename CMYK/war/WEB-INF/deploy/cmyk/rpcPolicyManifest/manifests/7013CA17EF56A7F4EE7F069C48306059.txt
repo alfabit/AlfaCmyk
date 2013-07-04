@@ -1,0 +1,2 @@
+serviceClass: com.digitwolf.cmyk.client.DataService
+path: 134EF0BDBA0DD94F5C0DDFD8B41877DF.gwt.rpc

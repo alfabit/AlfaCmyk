@@ -25,7 +25,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface DataService extends RemoteService {
     public ArrayList<Machine> getMachines();
 
-    public void addMachine(Machine machine);
+    public Machine addMachine(Machine machine);
+    public void updateMachine(Machine machine);
+    public void deleteMachine(Machine machine);
 	
 	/**
 	 * Utility class for simplifying access to the instance of async service.

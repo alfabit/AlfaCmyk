@@ -10,6 +10,10 @@ public interface DataServiceAsync {
 
 	void getMachines(AsyncCallback<ArrayList<Machine>> callback);
 
-	void addMachine(Machine machine, AsyncCallback<Void> callback);
+	void addMachine(Machine machine, AsyncCallback<Machine> callback);
+
+	void deleteMachine(Machine machine, AsyncCallback<Void> callback);
+
+	void updateMachine(Machine machine, AsyncCallback<Void> callback);
 
 }

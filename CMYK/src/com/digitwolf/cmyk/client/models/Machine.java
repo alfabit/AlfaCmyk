@@ -40,32 +40,32 @@ public class Machine implements IsSerializable {
      * Minimal width of the paper, which can be inserted into the machine.
      */
     @Persistent
-    private float paperWidthMin;
+    private int paperWidthMin;
 
     /**
      * Minimal height of the paper, which can be inserted into the machine.
      */
     @Persistent
-    private float paperHeightMin;
+    private int paperHeightMin;
 
 
     /**
      * Maximum width of the paper, which can be inserted into the machine.
      */
     @Persistent
-    private float paperWidthMax;
+    private int paperWidthMax;
 
     /**
      * Maximum height of the paper, which can be inserted into the machine.
      */
     @Persistent
-    private float paperHeightMax;
+    private int paperHeightMax;
     
     @Persistent
-    private float paperThickMin;
+    private int paperThickMin;
     
     @Persistent
-    private float paperThickMax;
+    private int paperThickMax;
 
     @Persistent
     private int paperLoadSize;
@@ -74,14 +74,14 @@ public class Machine implements IsSerializable {
      * Minimal density of the paper, which can be inserted into the machine.
      */
     @Persistent
-    private float densityMin;
+    private int densityMin;
 
 
     /**
      * Maximum density of the paper, which can be inserted into the machine.
      */
     @Persistent
-    private float densityMax;
+    private int densityMax;
 
     @Persistent
     private String productionRateName;
@@ -93,6 +93,8 @@ public class Machine implements IsSerializable {
      *
      * *********************************SETUP*********************
      */
+    @Persistent
+    private boolean sutupRequired;
 
     /**
      * Time for the machine setup
@@ -107,13 +109,13 @@ public class Machine implements IsSerializable {
     private int setupSheetWaste;
 
     @Persistent
-    private float additionalCosts;
+    private int additionalCosts;
 
     /**
      * % of the waste rate for the tech. needs
      */
     @Persistent
-    private float wasteRate;
+    private int wasteRate;
 
 
     /**
@@ -158,7 +160,7 @@ public class Machine implements IsSerializable {
         return paperWidthMin;
     }
 
-    public void setPaperWidthMin(float paperWidthMin) {
+    public void setPaperWidthMin(int paperWidthMin) {
         this.paperWidthMin = paperWidthMin;
     }
 
@@ -166,7 +168,7 @@ public class Machine implements IsSerializable {
         return paperHeightMin;
     }
 
-    public void setPaperHeightMin(float paperHeightMin) {
+    public void setPaperHeightMin(int paperHeightMin) {
         this.paperHeightMin = paperHeightMin;
     }
 
@@ -174,7 +176,7 @@ public class Machine implements IsSerializable {
         return paperWidthMax;
     }
 
-    public void setPaperWidthMax(float paperWidthMax) {
+    public void setPaperWidthMax(int paperWidthMax) {
         this.paperWidthMax = paperWidthMax;
     }
 
@@ -182,7 +184,7 @@ public class Machine implements IsSerializable {
         return paperHeightMax;
     }
 
-    public void setPaperHeightMax(float paperHeightMax) {
+    public void setPaperHeightMax(int paperHeightMax) {
         this.paperHeightMax = paperHeightMax;
     }
 
@@ -190,7 +192,7 @@ public class Machine implements IsSerializable {
         return densityMin;
     }
 
-    public void setDensityMin(float densityMin) {
+    public void setDensityMin(int densityMin) {
         this.densityMin = densityMin;
     }
 
@@ -198,7 +200,7 @@ public class Machine implements IsSerializable {
         return densityMax;
     }
 
-    public void setDensityMax(float densityMax) {
+    public void setDensityMax(int densityMax) {
         this.densityMax = densityMax;
     }
 
@@ -218,7 +220,15 @@ public class Machine implements IsSerializable {
         this.productionRate = productionRate;
     }
 
-    public int getSetupTime() {
+    public boolean isSutupRequired() {
+		return sutupRequired;
+	}
+
+	public void setSutupRequired(boolean sutupRequired) {
+		this.sutupRequired = sutupRequired;
+	}
+
+	public int getSetupTime() {
         return setupTime;
     }
 
@@ -238,7 +248,7 @@ public class Machine implements IsSerializable {
         return additionalCosts;
     }
 
-    public void setAdditionalCosts(float additionalCosts) {
+    public void setAdditionalCosts(int additionalCosts) {
         this.additionalCosts = additionalCosts;
     }
 
@@ -246,7 +256,7 @@ public class Machine implements IsSerializable {
         return wasteRate;
     }
 
-    public void setWasteRate(float wasteRate) {
+    public void setWasteRate(int wasteRate) {
         this.wasteRate = wasteRate;
     }
 

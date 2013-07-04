@@ -1,23 +1,27 @@
 package com.digitwolf.cmyk.client.view;
 
+import net.customware.gwt.presenter.client.EventBus;
+
+import com.digitwolf.cmyk.client.UserServiceAsync;
+import com.digitwolf.cmyk.client.events.RecievedLoginInfoEvent;
+import com.digitwolf.cmyk.client.models.LoginInfo;
 import com.digitwolf.cmyk.client.presenter.MainPresenter;
+import com.digitwolf.cmyk.client.presenter.MenuPresenter;
 import com.github.gwtbootstrap.client.ui.Container;
-import com.github.gwtbootstrap.client.ui.base.HasPlaceholder;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.editor.ui.client.adapters.HasTextEditor;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Руслан
- * Date: 11.06.13
- * Time: 16:06
- * To change this template use File | Settings | File Templates.
+ * Main view
+ * @author RyB
+ *
  */
 public class MainView extends Composite implements MainPresenter.Display {
 
@@ -32,13 +36,43 @@ public class MainView extends Composite implements MainPresenter.Display {
     @UiField
     Container container;
 
+	private UserServiceAsync userServiceAsync;
+
+	private EventBus eventBus;
+
     @Inject
-    public MainView(final MenuView menu, final MachinesList machinesList) {
+    public MainView(final MenuPresenter menu, final UserServiceAsync userServiceAsync, final EventBus eventBus) {
 
-        initWidget(ourUiBinder.createAndBindUi(this));
+        this.userServiceAsync = userServiceAsync;
+		this.eventBus = eventBus;
+		initWidget(ourUiBinder.createAndBindUi(this));
 
-        menuContainer.add(menu);
-        container.add(machinesList);
-
+        menuContainer.add(menu.getDisplay().asWidget());
+        //container.add(machinesList);
+        
     }
+    @Override
+    protected void onLoad() {
+    	super.onLoad();
+    	
+    	userServiceAsync.getLoginInfo(new AsyncCallback<LoginInfo>() {
+			
+			@Override
+			public void onSuccess(LoginInfo result) {
+				eventBus.fireEvent(new RecievedLoginInfoEvent(result));
+				LoginInfo.setInstance(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+    }
+    
+	@Override
+	public HasWidgets getMainContainer() {		
+		return this.container;
+	}
 }

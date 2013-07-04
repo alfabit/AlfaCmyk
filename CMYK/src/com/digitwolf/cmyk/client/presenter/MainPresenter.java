@@ -1,16 +1,31 @@
 package com.digitwolf.cmyk.client.presenter;
 
 
-import com.google.inject.Inject;
 import net.customware.gwt.presenter.client.EventBus;
+import net.customware.gwt.presenter.client.Presenter;
 import net.customware.gwt.presenter.client.widget.WidgetDisplay;
 import net.customware.gwt.presenter.client.widget.WidgetPresenter;
 
+import com.digitwolf.cmyk.client.events.navigation.ShowMachinesEvent;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.inject.Inject;
+
 public class MainPresenter extends WidgetPresenter<MainPresenter.Display> {
 
-    @Override
-    protected void onBind() {
+	
+	
+    private Presenter currentPresenter;
+	private MachinesPresenter machinesPresenter;
 
+	@Override
+    protected void onBind() {
+    	eventBus.addHandler(ShowMachinesEvent.TYPE, new ShowMachinesEvent.Handler() {
+			
+			@Override
+			public void onShowMachines(ShowMachinesEvent event) {
+				activatePresenter(machinesPresenter);			
+			}
+		});
 
     }
 
@@ -28,14 +43,22 @@ public class MainPresenter extends WidgetPresenter<MainPresenter.Display> {
 
     @Inject
     public MainPresenter(final Display display,
-                         final EventBus eventBus) {
+                         final EventBus eventBus,
+                         final MachinesPresenter machinesPresenter) {
         super(display, eventBus);
-
-      //  _dispatch = dispatch;
+		this.machinesPresenter = machinesPresenter;
     }
 
     public interface Display extends WidgetDisplay {
+		HasWidgets getMainContainer();
 
-
+    }
+    
+    public void activatePresenter(Presenter presenter){  
+    	if(this.currentPresenter!=presenter){
+			this.currentPresenter = presenter;	
+			this.getDisplay().getMainContainer().clear();
+			this.getDisplay().getMainContainer().add(((WidgetDisplay) presenter.getDisplay()).asWidget());
+    	}
     }
 }

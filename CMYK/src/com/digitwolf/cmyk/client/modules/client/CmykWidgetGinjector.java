@@ -1,6 +1,7 @@
 package com.digitwolf.cmyk.client.modules.client;
 
 import com.digitwolf.cmyk.client.presenter.AppPresenter;
+import com.digitwolf.cmyk.client.presenter.MainPresenter;
 import com.digitwolf.cmyk.client.view.MainView;
 import com.digitwolf.cmyk.client.view.MenuView;
 import com.google.gwt.core.client.GWT;
@@ -19,7 +20,10 @@ public interface CmykWidgetGinjector extends Ginjector {
     public static final CmykWidgetGinjector Instance = GWT.create(CmykWidgetGinjector.class);
 
     AppPresenter getAppPresenter();
+    //PlaceManager getPlaceManager();
     //PlaceHistoryHandler getPlaceHistoryHandler(+);
+    
+    MainPresenter getMainPresenter();
     MainView getMainView();
     MenuView getMenuView();
 }
